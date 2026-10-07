@@ -16,7 +16,7 @@ spec:
     spec:
       initContainers:
         - name: db-migrate
-          image: todo-app-v1:latest
+          image: todo-app-v2:latest
           command: ["./bin/rails", "db:prepare"]
           env:
             # Chave 'uri' gerada automaticamente pelo CNPG no Secret
@@ -30,7 +30,7 @@ spec:
               value: "treino-nao-use-em-producao-0123456789abcdef"
       containers:
         - name: api
-          image: todo-app-v1:latest
+          image: todo-app-v2:latest
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
