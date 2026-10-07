@@ -53,6 +53,6 @@ class TodosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.expect(todo: [ :title, :completed ])
+      params.expect(todo: [ :title, :completed, :seconds_spent ])
     end
 end

@@ -21,6 +21,10 @@
       </dd>
     </div>
     <div class="detail-row">
+      <dt>Tempo gasto</dt>
+      <dd><%= format_duration(@todo.seconds_spent) %></dd>
+    </div>
+    <div class="detail-row">
       <dt>Criada em</dt>
       <dd><%= l(@todo.created_at, format: :long) rescue @todo.created_at.strftime("%d/%m/%Y às %H:%M") %></dd>
     </div>

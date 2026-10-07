@@ -1,4 +1,8 @@
-<div id="<%= dom_id todo %>" class="todo-item <%= "completed" if todo.completed? %>">
+<div id="<%= dom_id todo %>" class="todo-item <%= "completed" if todo.completed? %>"
+     data-controller="timer"
+     data-timer-seconds-value="<%= todo.seconds_spent %>"
+     data-timer-url-value="<%= todo_path(todo) %>"
+     data-timer-running-value="false">
   <%= form_with(model: todo, class: "todo-check", data: { turbo_frame: "_top" }) do |form| %>
     <label>
       <%= form.check_box :completed, onchange: "this.form.requestSubmit()" %>
@@ -9,6 +13,14 @@
   <% end %>
 
   <span class="todo-title"><%= todo.title %></span>
+
+  <span class="todo-timer" data-timer-target="time" title="Tempo gasto"><%= format_duration(todo.seconds_spent) %></span>
+
+  <button type="button" class="todo-timer-toggle" data-timer-target="toggle" data-action="timer#toggle"
+          title="Iniciar" aria-pressed="false" aria-label="Alternar cronômetro de <%= todo.title %>">
+    <svg class="icon-play" viewBox="0 0 24 24"><polygon points="6 4 20 12 6 20"/></svg>
+    <svg class="icon-pause" viewBox="0 0 24 24"><rect x="6" y="4" width="4" height="16" rx="1"/><rect x="14" y="4" width="4" height="16" rx="1"/></svg>
+  </button>
 
   <%= button_to todo_path(todo), method: :delete, class: "todo-delete", form_class: "todo-delete-form", title: "Excluir tarefa", aria: { label: "Excluir #{todo.title}" } do %>
     <svg viewBox="0 0 24 24">

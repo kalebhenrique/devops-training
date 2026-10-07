@@ -1,13 +1,17 @@
 <% content_for :title, "Todos" %>
 
 <div class="hero">
-  <h1>Minhas <span>Tarefas</span> 📝</h1>
+  <h1>Syncrony
+  </h1>
   <p>Organize seu dia, uma tarefa de cada vez.</p>
 </div>
 
 <div class="card">
   <%= form_with(model: Todo.new, url: todos_path, class: "new-todo") do |form| %>
-    <%= form.text_field :title, placeholder: "O que precisa ser feito?", required: true, autocomplete: "off" %>
+    <%= form.text_field :title,
+                    placeholder: "O que precisa ser feito?",
+                    required: true,
+                    autocomplete: "off" %>
     <%= form.submit "Adicionar", class: "btn btn-primary" %>
   <% end %>
 </div>
@@ -15,10 +19,20 @@
 <% if @todos.any? %>
   <% done = @todos.count(&:completed?) %>
   <div class="stats">
-    <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="<%= @todos.size %>" aria-valuenow="<%= done %>">
-      <div class="progress-bar" style="width: <%= (done.to_f / @todos.size * 100).round %>%"></div>
+    <div
+      class="progress"
+      role="progressbar"
+      aria-valuemin="0"
+      aria-valuemax="<%= @todos.size %>"
+      aria-valuenow="<%= done %>"
+    >
+      <div
+        class="progress-bar"
+        style="width: <%= (done.to_f / @todos.size * 100).round %>%"
+      ></div>
     </div>
-    <span><%= done %>/<%= @todos.size %> concluídas</span>
+    <span><%= done %>/<%= @todos.size %>
+      concluídas</span>
   </div>
 
   <div id="todos" class="todo-list">
